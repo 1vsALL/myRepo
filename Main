@@ -1,0 +1,69 @@
+package org.example;
+
+public class Main {
+    public static void main(String[] args) {
+
+    }
+
+    public static String calc(String input) {
+        String[] strings = input.split(" ");
+        if (strings.length != 3) try {
+            throw new Exception();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            return arabicCalc(strings);
+        } catch (Exception e) {
+            try {
+                return roman(strings);
+            } catch (Exception ex) {
+                throw new RuntimeException();
+            }
+        }
+    }
+
+    public static String roman(String[] strings) throws Exception {
+        String[] roman = {"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
+                "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
+                "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
+                "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
+                "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
+                "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
+                "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"};
+        String first = "", second = "";
+        for (int i = 0; i <= 10; i++) {
+            if (strings[0].equals(roman[i])) {
+                first = String.valueOf(i);
+            }
+        }
+        for (int i = 0; i <= 10; i++) {
+            if (strings[2].equals(roman[i])) {
+                second = String.valueOf(i);
+            }
+        }
+        String[] result = {first, strings[1], second};
+        Integer romeToArabic = Integer.parseInt(arabicCalc(result));
+        if (romeToArabic > 0) {
+            return roman[romeToArabic];
+        } else throw new Exception();
+    }
+
+    public static String arabicCalc(String[] strings) throws Exception {
+        int first = Integer.parseInt(strings[0]);
+        int second = Integer.parseInt(strings[2]);
+        if ( first <= 10 && second <= 10) {
+            switch (strings[1]) {
+                case "+":
+                    return String.valueOf(first + second);
+                case "-":
+                    return String.valueOf(first - second);
+                case "/":
+                    return String.valueOf(first / second);
+                case "*":
+                    return String.valueOf(first * second);
+            }
+        }
+        throw new Exception();
+    }
+}
