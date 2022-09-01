@@ -1,7 +1,13 @@
-
 public class Main {
     public static void main(String[] args) {
+         BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String s= bufferedReader.readLine();
+            System.out.println(calc(s.toString()).trim());
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static String calc(String input) {
